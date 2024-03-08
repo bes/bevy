@@ -3,6 +3,7 @@ use crate::render_resource::{
     RenderPipeline, Sampler, Texture,
 };
 use bevy_ecs::system::Resource;
+use std::sync::Arc;
 use wgpu::{
     util::DeviceExt, BindGroupDescriptor, BindGroupEntry, BindGroupLayoutDescriptor,
     BindGroupLayoutEntry, BufferAsyncError, BufferBindingType, MaintainResult,
@@ -24,6 +25,14 @@ impl From<wgpu::Device> for RenderDevice {
     fn from(device: wgpu::Device) -> Self {
         Self {
             device: ErasedRenderDevice::new(device),
+        }
+    }
+}
+
+impl From<Arc<wgpu::Device>> for RenderDevice {
+    fn from(device: Arc<wgpu::Device>) -> Self {
+        Self {
+            device: ErasedRenderDevice::from_arc(device),
         }
     }
 }

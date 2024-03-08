@@ -16,6 +16,10 @@ macro_rules! render_resource_wrapper {
         impl $wrapper_type {
             pub fn new(value: $wgpu_type) -> Self {
                 let arc = std::sync::Arc::new(value);
+                Self::from_arc(arc)
+            }
+
+            pub fn from_arc(arc: std::sync::Arc<$wgpu_type>) -> Self {
                 let value_ptr = std::sync::Arc::into_raw(arc);
                 let unit_ptr = value_ptr.cast::<()>();
                 Self(unit_ptr)

@@ -333,6 +333,11 @@ futures-lite = "2.0.1"
 crossbeam-channel = "0.5.0"
 argh = "0.1.12"
 
+[patch.crates-io]
+wgpu = { path = "../wgpu/wgpu" }
+wgpu-core = { path = "../wgpu/wgpu-core" }
+naga = { path = "../wgpu/naga" }
+
 [[example]]
 name = "hello_world"
 path = "examples/hello_world.rs"
